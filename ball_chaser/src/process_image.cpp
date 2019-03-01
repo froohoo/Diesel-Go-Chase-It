@@ -29,7 +29,7 @@ void process_image_callback(const sensor_msgs::Image img)
     int sumChannels = 0;
     int pixelStart = 0;
     const int totalPixels = img.height * img.width;
-    const float goalFill = .44440; //fraction of the screen filled white ball @ goal
+    const float goalFill = .40; //fraction of the screen filled white ball @ goal
     const char *encoding = img.encoding.c_str();
     float awm;
     float x, z;

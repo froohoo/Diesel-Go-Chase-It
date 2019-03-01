@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "ball_chaser/DriveToTarget.h"
 #include <sensor_msgs/Image.h>
+#include <string>
 
 //Define a global client that can request services
 
@@ -18,33 +19,58 @@ void drive_robot(float lin_x, float ang_z)
     }
 }
 
-//This callback function continuously executes and reads the image data
+//This callback/ function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
 {
-    int white_pixel_val = 255;
+    const int white_pixel_val = 3 * 255;
     int white_moment = 0;
     int white_pixels = 0;
     int total_pixels = 0;
+    int sumChannels = 0;
+    int pixelStart = 0;
+    const int totalPixels = img.height * img.width;
+    const float goalFill = .44440; //fraction of the screen filled white ball @ goal
+    const char *encoding = img.encoding.c_str();
     float awm;
     float x, z;
+    // process one row at at time (i)
     for(int i=0; i<img.height; ++i){
-        for (int j=0; j<img.step; ++j){
-            ++total_pixels;
-            if (img.data[i * img.step + j] == white_pixel_val){
+        // process one pixel in the row at a time. Image encoding is rgb8
+        // so each pixel is 3 bytes; one byte each for red green blue channel.
+        // white pixels should be the only ones where the channels add up to 
+        // be 3 * 255.
+
+        // Process each column/pixel (3 bytes so step = 3)
+        for (int j=0; j<img.step; j+=3){
+            sumChannels = 0;
+            pixelStart = i * img.step + j;
+            // Add up all the channels for that pixel
+            for (int channel=0;channel < 3;channel++){
+                sumChannels += img.data[pixelStart + channel];
+            }
+            // Moment is a bit of an abstraction here, but I like the 
+            // to think of this problem as the inertia of the white 
+            // pixels about the center of the image 
+            if (sumChannels == white_pixel_val){
                 ++white_pixels;
                 white_moment = white_moment + j - img.step/2;
                 awm = white_moment/white_pixels;
             }
         }
     }
-    ROS_INFO("%d white pixels found. awm is %1.2f ", (int)white_pixels,awm);
+    // Print the metadata from the image message:
+    ROS_INFO("%d white pixels found. awm is %1.2f\n", (int)white_pixels,awm);
+    ROS_INFO("\nImage metadata:\n Height %d, Width %d,\n Encoding %s,\
+           \n Step: %d, Big Endian?: %d\n", (int)img.height, (int)img.width,
+          encoding, img.step, img.is_bigendian); 
+
     if (white_pixels == 0) { // no pixels found turn until you find some.
         x = 0.0;
         z = -.5;
     }  
     else {
-        x = 0.1;
-        z=  -0.5*awm/600;
+        x = .5 *(1 - white_pixels/(totalPixels*goalFill));
+        z=  -0.75*awm/600;
     }
     
     

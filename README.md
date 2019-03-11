@@ -17,5 +17,5 @@ Installation:
 5. run `source catkin_make/devel/setup.bash`
 6. run `roslaunch my_robot world.launch`
 7. 
-  a. To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`
-  b. To launch the MSE6 run: `roslaunch my_robot world.launch MSE6:=true` 
+  * To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`
+  * To launch the MSE6 run: `roslaunch my_robot world.launch MSE6:=true` 

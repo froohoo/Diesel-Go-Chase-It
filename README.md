@@ -18,5 +18,5 @@ Installation:
 6. run `roslaunch my_robot world.launch`
 7. 
 
-  * To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`
-  * To launch the MSE6 run: `roslaunch my_robot world.launch MSE6:=true` 
+       * To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`
+       * To launch the MSE6 run: `roslaunch my_robot world.launch MSE6:=true` 

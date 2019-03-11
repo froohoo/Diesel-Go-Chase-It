@@ -2,11 +2,16 @@
 #include "ball_chaser/DriveToTarget.h"
 #include <sensor_msgs/Image.h>
 #include <string>
+#include <cmath>
 
 //Define a global client that can request services
-
 ros::ServiceClient client;
 
+//Define a couple of Globals. 
+//MAXSPEED and MAXTURN are read from teh parameter server
+//directionGuess persists between calls in case ball goes out of frame
+float MAXSPEED, MAXTURN;
+float directionGuess = -1;
 // This function calls the command_robot service to drive the robot in the specified direction
 void drive_robot(float lin_x, float ang_z)
 {
@@ -20,7 +25,7 @@ void drive_robot(float lin_x, float ang_z)
 }
 
 //This callback/ function continuously executes and reads the image data
-void process_image_callback(const sensor_msgs::Image img)
+void process_image_callback(const sensor_msgs::Image img )
 {
     const int white_pixel_val = 3 * 255;
     int white_moment = 0;
@@ -31,7 +36,7 @@ void process_image_callback(const sensor_msgs::Image img)
     const int totalPixels = img.height * img.width;
     const float goalFill = .40; //fraction of the screen filled white ball @ goal
     const char *encoding = img.encoding.c_str();
-    float awm;
+    float awm = 0;
     float x, z;
     // process one row at at time (i)
     for(int i=0; i<img.height; ++i){
@@ -66,28 +71,44 @@ void process_image_callback(const sensor_msgs::Image img)
 
     if (white_pixels == 0) { // no pixels found turn until you find some.
         x = 0.0;
-        z = -.5;
+        z = directionGuess * MAXTURN;
     }  
     else {
-        x = .5 *(1 - white_pixels/(totalPixels*goalFill));
-        z=  -0.75*awm/600;
+        x = MAXSPEED * std::pow(1 - white_pixels/(totalPixels*goalFill), 6.0);
+        z = MAXTURN * std::pow(std::abs(2.0 * awm / img.step),.9);
+        if (awm < 0){   //awm negative, ball is left, positive turn
+            directionGuess = 1.0; //set guess in case we lose sight of ball 
+        }
+        else if (awm > 0) { //awm positive, ball is right, negative turn
+            directionGuess = -1.0;
+            z *= -1;
+        }
     }
     
     
-   
+    
     drive_robot(x,z);
-
 }
 
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "process_image");
     ros::NodeHandle n;
-
+    
+    if (n.getParam("/MAXSPEED", MAXSPEED) && n.getParam("/MAXTURN", MAXTURN)){
+        ROS_INFO("Parameter Server Returned %f / %f for MAXSPEED, MAXTURN",(float)MAXSPEED, (float)MAXTURN);
+    }
+    else {
+        MAXSPEED = .1;
+        MAXTURN = 1.0;
+        ROS_INFO("MAXSPEED, MAXTURN not set. Using Defaults %f / %f", (float)MAXSPEED, (float)MAXTURN);
+    }
     client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
     ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
 
     ros::spin();
+    
+
 
     return 0;
 }

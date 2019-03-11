@@ -10,12 +10,12 @@ In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer ro
 ![MSE6](/MSE6.png)
 
 Installation:
-# run  `mkdir catkin_ws/src -p`
-# copy /ball_chaser and /my_robot to catkin_ws/src/ 
-# run `catkin_make`
-# run `source catkin_make/devel/setup.bash`
-# run `roslaunch my_robot world.launch`
-# run `roslaunch ball_chaser ball_chaser.launch`
+1. run  `mkdir catkin_ws/src -p`
+2. copy /ball_chaser and /my_robot to catkin_ws/src/ 
+3. run `catkin_make`
+4. run `source catkin_make/devel/setup.bash`
+5. run `roslaunch my_robot world.launch`
+6. run `roslaunch ball_chaser ball_chaser.launch`
 
 To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`
 

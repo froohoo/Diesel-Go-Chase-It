@@ -9,6 +9,8 @@ https://youtu.be/nNQRK6SXKsg
 In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer robot based loosely off of the MSE6 from Star Wars is also included. 
 ![MSE6](/MSE6.png)
 
+The MSE6 mesh was created with [FreeCad](https://www.freecadweb.org/) and exported as a Collada (.dae) file. For those with parametric modeling experience, its an easy way to add visual flair to your robots. 
+
 Installation:
 1. run  `mkdir catkin_ws/src -p`
 2. copy /ball_chaser and /my_robot to catkin_ws/src/

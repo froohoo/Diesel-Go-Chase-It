@@ -6,7 +6,7 @@ https://youtu.be/nNQRK6SXKsg
 
 
 
-In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer robot based loosely off of the MSE6 from Star Wars is also included. *Note that the current skid steering works but is abysmyl (compared to the 2 wheel bot) and I am not entirely sure why. I'm currently worling on an ackerman steering plugin which I believe will produce much better results.*  
+In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer robot based loosely off of the MSE6 from Star Wars is also included. *Note that the current skid steering works but is abysmyl (compared to the 2 wheel bot) and I am not entirely sure why. I'm currently working on an ackerman steering plugin which I believe will produce much better results.*  
 ![MSE6](/MSE6.png)
 
 The MSE6 mesh was created with [FreeCad](https://www.freecadweb.org/) and exported as a Collada (.dae) file. For those with parametric modeling experience, its an easy way to add visual flair to your robots. 

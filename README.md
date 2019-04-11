@@ -6,8 +6,8 @@ https://youtu.be/nNQRK6SXKsg
 
 
 In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer robot based loosely off of the MSE6 from Star Wars is also included. The MSE6 uses the Ackerman Steering plugin that I developed since the skid steer performance was poor.
+![MSE6](/MSE6.png)
 ![MSE6](/MSE6.gif)
-
 The MSE6 mesh was created with [FreeCad](https://www.freecadweb.org/) and exported as a Collada (.dae) file. For those with parametric modeling experience, its an easy way to add visual flair to your robots. See [this tutorial](http://gazebosim.org/tutorials?tut=guided_i2) for details/walkthrough.
 
 Installation:

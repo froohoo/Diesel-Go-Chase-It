@@ -1,5 +1,6 @@
 #include "ros/ros.h"
 #include <sensor_msgs/Image.h>
+#include "ball_chaser/DriveToTarget.h"
 #include <string>
 #include <cmath>
 

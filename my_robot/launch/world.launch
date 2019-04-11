@@ -15,14 +15,14 @@
   <!-- Select correct Model -->
   <group unless="$(arg MSE6)">
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'"/>
-    <param name="MAXSPEED" value="2.0"/>
-    <param name="MAXTURN"  value="0.3"/>
+    <param name="MAXSPEED" value="1.5"/>
+    <param name="MAXTURN"  value="1.0"/>
     <include file="$(find my_robot)/launch/robot_description.launch"/>
   </group>
   <group if="$(arg MSE6)">
       <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/MSE6_robot.xacro'"/>
-      <param name="MAXSPEED" value="0.3"/>
-      <param name="MAXTURN"  value=".5"/>
+      <param name="MAXSPEED" value="1.5"/>
+      <param name="MAXTURN"  value=".3"/>
     <include file="$(find my_robot)/launch/MSE6_description.launch"/>
   </group>
 

@@ -7,7 +7,7 @@ Sample Video of Performance
 
 
 
-In addition to the 2 wheeled differential drive robot, a 4 wheeled skid steer robot based loosely off of the MSE6 from Star Wars is also included. The MSE6 uses the Ackerman Steering plugin that I developed since the skid steer performance was poor.
+In addition to the 2 wheeled differential drive robot, a 4 wheeled robot based loosely off of the MSE6 from Star Wars is also included. The MSE6 uses acustom Ackermann Steering plugin that I developed since the skid steer plugin performance was poor in this application.
 
 
 ![MSE6](/MSE6.png)

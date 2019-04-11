@@ -18,7 +18,7 @@ The MSE6 mesh was created with [FreeCad](https://www.freecadweb.org/) and export
 
 Installation:
 1. run  `mkdir catkin_ws/src -p`
-2. copy /ball_chaser and /my_robot to catkin_ws/src/
+2. copy ball_chaser, ackermansteer and my_robot directories to catkin_ws/src/
 3. cd catkin_ws
 4. run `catkin_make`
 5. run `source catkin_make/devel/setup.bash`

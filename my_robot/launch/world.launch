@@ -15,8 +15,8 @@
   <!-- Select correct Model -->
   <group unless="$(arg MSE6)">
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'"/>
-    <param name="MAXSPEED" value="1.5"/>
-    <param name="MAXTURN"  value="1.0"/>
+    <param name="MAXSPEED" value="1.0"/>
+    <param name="MAXTURN"  value=".75"/>
     <include file="$(find my_robot)/launch/robot_description.launch"/>
   </group>
   <group if="$(arg MSE6)">

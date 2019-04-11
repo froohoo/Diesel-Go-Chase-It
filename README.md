@@ -20,9 +20,8 @@ Installation:
 1. run  `mkdir catkin_ws/src -p`
 2. copy ball_chaser, ackermansteer and my_robot directories to catkin_ws/src/
 3. cd catkin_ws
-4. run `catkin_make`
-4a. If you get an error run step 5, then catkin_make again.
-5. run `source catkin_make/devel/setup.bash`
+4. run `catkin_make` If you get an error run step 5, then `catkin_make` again.
+5. run `source devel/setup.bash`
 6. run `roslaunch my_robot world.launch`
 7. 
        * To launch the 2 wheeled robot run:`roslaunch my_robot world.launch`

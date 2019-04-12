@@ -14,6 +14,9 @@ In addition to the 2 wheeled differential drive robot, a 4 wheeled robot based l
 ![MSE6](/MSE6.gif)
 
 
+Not perfect, but I think it's close enough for my purposes:
+![MSE6](https://vignette.wikia.nocookie.net/starwars/images/b/b7/MSE-6_btm.jpg/revision/latest?cb=20080318141837)
+
 The MSE6 mesh was created with [FreeCad](https://www.freecadweb.org/) and exported as a Collada (.dae) file. For those with parametric modeling experience, its an easy way to add visual flair to your robots. See [this tutorial](http://gazebosim.org/tutorials?tut=guided_i2) for details/walkthrough.
 
 Installation:
